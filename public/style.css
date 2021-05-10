@@ -1,0 +1,72 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: sans-serif;
+}
+
+canvas {
+	display: block;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.information {
+	width: 640px;
+	margin: 0 auto 50px;
+}
+
+#tracker {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	background-color: white;
+}
+
+h1 {
+	font-size: 200%;
+}
+
+.overlay{
+	opacity:0.5;
+    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+}
+.tchat {
+	position:fixed;
+	bottom:5px;
+    left:0.5%;
+	width:100%
+}
+
+.tchat-container,.tchat-sender{
+	border-radius:0px;
+	border:1px solid black;
+	color:white;
+	font-family:Minecraft;
+	opacity:0.6;
+    background-color:black;
+}
+
+.tchat-container{
+	height:500px;
+	width:85%;
+	display:none;
+}
+
+.tchat-container > span{
+	margin-left:5px;
+	margin-bottom:5px;
+	align-self:flex-end
+}
+
+.tchat-sender{
+	display:none;
+width:98%
+}

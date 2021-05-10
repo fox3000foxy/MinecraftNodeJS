@@ -1,0 +1,5 @@
+[
+{"label":"Demo server","ip":"localhost","port":64758,"motd":"Your demo server<br>Find me in ./assets/serverList.json"},
+{"label":"Rinaorc","ip":"play.rinaorc.com","port":25565,"motd":"Your demo server<br>Find me in ./assets/serverList.json"},
+{"label":"Michaljaz server","ip":"185.228.139.97","port":25564,"motd":"Your demo server<br>Find me in ./assets/serverList.json"}
+]

@@ -1,0 +1,27 @@
+{
+  "name": "simple-web-mc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "flying-squid": "^1.4.0",
+    "mineflayer": "^3.6.0",
+    "mineflayer-web-inventory": "^1.4.0",
+    "prismarine-viewer": "^1.19.3",
+    "vec3": "^0.1.7"
+  },
+  "bin": {
+    "minecraft": "index.js"
+  },
+  "devDependencies": {
+    "electron": "^12.0.6"
+  }
+}

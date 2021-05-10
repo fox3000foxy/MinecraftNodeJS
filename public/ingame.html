@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<link type="text/css" rel="stylesheet" href="assets/style/button.css">
+	<script src="/socket.io/socket.io.js"></script>
+	<style>
+	    .dark {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/images/button_center.png');
+            font-family: Minecraft;
+            border: 1px solid black;
+            outline: 1px solid black;
+        }
+        
+        .dark:hover {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/images/button_center.png');
+            border: 1px solid black;
+        }
+	</style>
+</head>
+<body>
+  <iframe
+  width="100%"
+  height="100%"
+  style="position:absolute;bottom:0;left:0"
+  frameborder=0
+  src="http://localhost:3001"
+  id="canvas"
+  ></iframe>
+      <div style="
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: auto;
+ 	margin-bottom: auto;
+	max-width: 200px;
+	max-height: 200px;
+	width:15px;
+	height:15px;
+	font-size:50px;
+	color:white;
+	display:none
+	" id="cible">+</div>
+  <div style="position:absolute;top:5px;left:5px;font-family:Minecraft">
+  <img src='health.png' style='width:32px;height:32px'> x<span id="health"></span><br>
+  <img src='hunger.png' style='width:32px;height:32px'> x<span id="food"></span>
+  <div id="heldItem"></div>
+  </div>
+  <img src="assets/images/hand.png" style="position:absolute;bottom:0;right:50px">
+   <div class="tchat">
+	<div class="tchat-container" id="tchat-container">
+	<span id="receiver">
+	</span>
+	</div><br><br>
+	<form name="chat" onsubmit="sendChat()">
+	<input class="tchat-sender" id="tchat-sender" name="sender">
+	</form>
+  </div>
+  <div class="overlay" style="display:block" id="bgOverlay"></div>
+    <div style="
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: auto;
+ 	margin-bottom: auto;
+	max-width: 414px;
+	max-height: 500px;
+	width:414px;
+	height:50%;
+	" id="MCEscapeMenu">
+	<button class="escape-button button" id="overlay">Back to game</button><br><br>
+	<button class="half-button" style="margin-right:5px">Advancements</button><button class="half-button" style="margin-left:5px">Statistics</button><br><br>
+	<br>
+	<button class="half-button" style="margin-right:5px">Options...</button><button class="dark half-button" style="margin-left:5px">Open to LAN</button><br><br>
+	<button class="escape-button button" onclick='location.href="/"'>Save and Quit to Title</button><br><br>
+	</div>
+<iframe
+  scrolling="no"
+  style="
+  overflow: hidden;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin-left: auto;
+ 	margin-right: auto;
+	max-width: 348px;
+	max-height: 45px;
+	width:348px;
+	height:45px;
+  "
+  frameborder=0
+  src="http://localhost:3000/clip.html"
+  id="hotbar"
+  ></iframe>
+  <iframe
+  scrolling="no"
+  style="
+  display:none;
+  overflow: hidden;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: auto;
+ 	margin-bottom: auto;
+	max-width: 375px;
+	max-height: 343px;
+	width:375px;
+	height:343px;
+  "
+  frameborder=0
+  src="http://localhost:3002"
+  id="inventory"
+  ></iframe>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+  <script>
+  historyArray = new Array()
+  historyIndex = 0
+  count=0
+  socket = io()
+	socket.emit("version",null)
+  socket.on('version', function(msg) {
+	document.title="Minecraft "+msg
+  });
+  
+  socket.on("msg",(msg)=>{
+  var prefix="";
+	document.getElementById("receiver").innerHTML += msg.replace("<","&lt").replace(">","&gt")+"<br>"
+	if(chatDisp==true) return
+	Chat()
+	hideChat()
+  })
+  
+  function sendChat(){
+  event.preventDefault()
+  elem = document.chat.sender
+  socket.emit("chat",elem.value)
+  lastMessageSended=elem.value
+  if(elem.value!="")
+  historyArray.push(elem.value)
+  historyIndex=historyArray.length
+  elem.value=""
+  }
+  
+    socket.on("health",(msg)=>{
+	if(msg==null) return
+  document.getElementById("health").innerHTML = Math.round(msg)
+  })
+      socket.on("heldItem",(msg)=>{
+	if(msg==null) return
+  socket.emit('blockTexture',msg.name)
+  count=msg.count
+  })
+  socket.on("food",(msg)=>{
+	if(msg==null) return
+  document.getElementById("food").innerHTML = Math.round(msg)
+  })
+  socket.on("blockTexture",(msg)=>{
+	if(msg==null) return
+  document.getElementById("heldItem").innerHTML = "<img src='"+msg+"' style='width:32px;height:32px'> x<span>"+count+"</span>"
+  })
+  socket.on("inventory",(msg)=>{
+	if(msg==null) return
+  hotbar = msg.slots.slice(36,45)
+  //console.log(hotbar)
+  })
+  
+  setInterval(()=>{
+	socket.emit("health",null)
+	socket.emit("food",null)
+	socket.emit("heldItem",null)
+	socket.emit("inventory",null)
+  })
+  </script>
+</body>
+</html>
