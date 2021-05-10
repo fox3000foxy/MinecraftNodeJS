@@ -1,6 +1,6 @@
 # Minecraftjs _by fox3000foxy_
 ## Short description
-Minecraft client running in NodeJS<br>
+Minecraft client running in [NodeJS](https://nodejs.org/en/download/)<br>
 He can be used like module or like minecraft client.<br><br>
 
 ## Installation
