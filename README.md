@@ -1,5 +1,5 @@
 # Minecraftjs _by fox3000foxy_
-##Short description
+## Short description
 Minecraft client running in NodeJS<br>
 He can be used like module or like minecraft client.<br><br>
 
