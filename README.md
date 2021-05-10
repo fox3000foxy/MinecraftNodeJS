@@ -27,7 +27,7 @@ He can connect to server without mods and offline mode. Auth will be added maybe
 ### Like module
 ```js
 const mineflayer = require('mineflayer')
-const createClient = require('./module').createClient
+const createClient = require('minecraftnodejs/module').createClient
 //Create a bot
 const bot = mineflayer.createBot({
 	username: "MinecraftJS",
