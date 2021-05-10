@@ -44,6 +44,24 @@ function connect(params) {
 	})
 }
 
+app.get('/map',(req,res)=>{
+	console.log("map asked")
+	http.get('http://localhost:3001/', (response) => {
+	  let todo = '';
+
+	  response.on('data', (chunk) => {
+		todo += chunk;
+	  });
+
+	  response.on('end', () => {
+		res.send(todo.replace("<head>","<head><base href='http://localhost:3001/'>"))
+	  });
+
+	}).on("error", (error) => {
+	  console.log("Error: " + error.message);
+	});
+})
+
 app.use(express.static('public'))
 
 io.on('connection', (socket) => {

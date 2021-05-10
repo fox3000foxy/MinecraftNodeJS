@@ -1,6 +1,6 @@
 {
-  "name": "simple-web-mc",
-  "version": "1.0.0",
+  "name": "minecraftnodejs",
+  "version": "1.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,9 +19,9 @@
     "vec3": "^0.1.7"
   },
   "bin": {
-    "minecraft": "index.js"
+    "minecraft": "./index.js"
   },
   "devDependencies": {
-    "electron": "^12.0.6"
+    "electron": "^12.0.7"
   }
 }
