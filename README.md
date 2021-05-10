@@ -5,12 +5,12 @@ He can be used like module or like minecraft client.<br><br>
 
 ## Installation
 ### Like client
-For install minecraftjs like client:
+For install minecraftnodejs like client:
 ```bash
 npm i -g minecraftjs (not if already installed)
 ```
 ### Like module
-For install for use minecraftjs like a module like example:
+For install for use minecraftnodejs like a module like example:
 ```bash
 npm i minecraftjs (not if already installed)
 ```
